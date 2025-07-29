@@ -52,6 +52,12 @@ const Navbar = () => {
                 {item.name}
               </button>
             ))}
+            <a
+              href="/admin"
+              className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors font-medium"
+            >
+              Admin
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -76,6 +82,12 @@ const Navbar = () => {
                   {item.name}
                 </button>
               ))}
+              <a
+                href="/admin"
+                className="block w-full text-left py-2 bg-primary text-primary-foreground px-4 rounded-lg hover:bg-primary/90 transition-colors font-medium mt-4"
+              >
+                Admin
+              </a>
             </div>
           </div>
         )}

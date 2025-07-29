@@ -8,7 +8,7 @@ interface Project {
   title: string;
   description: string;
   longDescription: string;
-  image: string;
+  images: string[];
   technologies: string[];
   liveUrl?: string;
   githubUrl?: string;
@@ -26,7 +26,7 @@ const Projects = () => {
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce solution with payment integration and admin dashboard.',
       longDescription: 'A comprehensive e-commerce platform built with modern web technologies. Features include user authentication, product catalog, shopping cart, payment processing, order management, and a complete admin dashboard for managing products, orders, and customers.',
-      image: '/api/placeholder/400/250',
+      images: ['/api/placeholder/400/250', '/api/placeholder/600/400', '/api/placeholder/500/300'],
       technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'JWT'],
       liveUrl: 'https://example-ecommerce.com',
       githubUrl: 'https://github.com/username/ecommerce',
@@ -46,7 +46,7 @@ const Projects = () => {
       title: 'Task Automation Tool',
       description: 'AI-powered automation platform for workflow optimization.',
       longDescription: 'An intelligent automation platform that helps businesses streamline their workflows. Uses AI to analyze processes and suggest optimizations, with N8N integration for complex workflow automation.',
-      image: '/api/placeholder/400/250',
+      images: ['/api/placeholder/400/250', '/api/placeholder/600/400'],
       technologies: ['React', 'Python', 'N8N', 'FastAPI', 'PostgreSQL'],
       liveUrl: 'https://example-automation.com',
       githubUrl: 'https://github.com/username/automation',
@@ -66,7 +66,7 @@ const Projects = () => {
       title: 'Portfolio Website',
       description: 'Responsive portfolio website with CMS integration.',
       longDescription: 'A modern, responsive portfolio website with an integrated content management system. Built with performance and SEO in mind, featuring smooth animations and mobile-first design.',
-      image: '/api/placeholder/400/250',
+      images: ['/api/placeholder/400/250', '/api/placeholder/800/500', '/api/placeholder/400/300', '/api/placeholder/600/400'],
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase'],
       liveUrl: 'https://example-portfolio.com',
       githubUrl: 'https://github.com/username/portfolio',
@@ -104,10 +104,15 @@ const Projects = () => {
             </Button>
           </div>
 
-          {/* Image */}
+          {/* Images */}
           <div className="mb-6">
-            <div className="w-full h-64 bg-muted rounded-lg flex items-center justify-center">
-              <span className="text-muted-foreground">Project Screenshot</span>
+            <h4 className="font-semibold text-foreground mb-3">Project Images</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {project.images.map((image, index) => (
+                <div key={index} className="w-full h-48 bg-muted rounded-lg flex items-center justify-center">
+                  <span className="text-muted-foreground">Project Screenshot {index + 1}</span>
+                </div>
+              ))}
             </div>
           </div>
 
