@@ -16,9 +16,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
+import AuthPage from '@/components/auth/AuthPage';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('overview');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { toast } = useToast();
 
   // Mock data - in real app, this would come from a database
   const [experiences, setExperiences] = useState([
@@ -64,6 +68,41 @@ const Admin = () => {
     yearsExperience: 4
   };
 
+  const handleDelete = (type: 'experience' | 'project', id: number) => {
+    if (type === 'experience') {
+      setExperiences(experiences.filter(exp => exp.id !== id));
+      toast({
+        title: "Success",
+        description: "Experience deleted successfully",
+      });
+    } else {
+      setProjects(projects.filter(proj => proj.id !== id));
+      toast({
+        title: "Success", 
+        description: "Project deleted successfully",
+      });
+    }
+  };
+
+  const handleSave = () => {
+    toast({
+      title: "Success",
+      description: "Changes saved successfully",
+    });
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    toast({
+      title: "Success",
+      description: "Logged out successfully",
+    });
+  };
+
+  if (!isAuthenticated) {
+    return <AuthPage />;
+  }
+
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Header */}
@@ -79,7 +118,7 @@ const Admin = () => {
                 <Settings className="mr-2 h-4 w-4" />
                 Settings
               </Button>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Logout
               </Button>
@@ -167,31 +206,6 @@ const Admin = () => {
               </Card>
             </div>
 
-            {/* Recent Activity */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Activity</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-2 h-2 bg-primary rounded-full"></div>
-                    <p className="text-sm text-muted-foreground">Updated E-Commerce Platform project</p>
-                    <span className="text-xs text-muted-foreground ml-auto">2 hours ago</span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <div className="w-2 h-2 bg-success rounded-full"></div>
-                    <p className="text-sm text-muted-foreground">Added new experience at Tech Solutions Inc.</p>
-                    <span className="text-xs text-muted-foreground ml-auto">1 day ago</span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <div className="w-2 h-2 bg-warning rounded-full"></div>
-                    <p className="text-sm text-muted-foreground">Updated skills section</p>
-                    <span className="text-xs text-muted-foreground ml-auto">3 days ago</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </TabsContent>
 
           {/* Experience Tab */}
@@ -222,7 +236,12 @@ const Admin = () => {
                         <Button variant="ghost" size="sm">
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="sm" className="text-destructive">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="text-destructive"
+                          onClick={() => handleDelete('experience', exp.id)}
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -269,7 +288,12 @@ const Admin = () => {
                         <Button variant="ghost" size="sm">
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="sm" className="text-destructive">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="text-destructive"
+                          onClick={() => handleDelete('project', project.id)}
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -322,7 +346,7 @@ const Admin = () => {
                   </div>
                 </div>
 
-                <Button className="btn-hero">
+                <Button className="btn-hero" onClick={handleSave}>
                   <Save className="mr-2 h-4 w-4" />
                   Save Changes
                 </Button>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import TypingEffect from '@/components/ui/TypingEffect';
 
 const Hero = () => {
   const handleDownloadCV = () => {
@@ -21,8 +22,19 @@ const Hero = () => {
                   Usman
                 </span>
               </h1>
-              <h2 className="text-xl lg:text-2xl text-muted-foreground font-medium">
-                A Web Developer
+              <h2 className="text-xl lg:text-2xl text-primary font-medium">
+                <TypingEffect 
+                  texts={[
+                    "A Web Developer",
+                    "A Full Stack Developer", 
+                    "An Automation Expert",
+                    "An AI Enthusiast",
+                    "A Problem Solver"
+                  ]}
+                  speed={100}
+                  deleteSpeed={50}
+                  pauseTime={2000}
+                />
               </h2>
               <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
                 Passionate about creating beautiful, functional web applications with modern technologies. 
