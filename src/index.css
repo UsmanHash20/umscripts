@@ -94,7 +94,7 @@
   
   /* Card Styles */
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-hover hover:scale-105;
+    @apply transition-all duration-300 hover:shadow-xl hover:scale-105;
   }
   
   .glass {
