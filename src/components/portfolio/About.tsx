@@ -64,18 +64,18 @@ const About = () => {
             <h3 className="text-xl font-semibold text-foreground mb-6">Core Technologies</h3>
             <div className="relative h-96 overflow-hidden rounded-lg bg-gradient-to-br from-background to-muted/30 border border-primary/10">
               {skills.map((skill, index) => {
-                const size = 55 + (index % 3) * 15; // Smaller variable sizes: 55px, 70px, 85px
-                const cols = 4; // Number of columns
+                const size = 55 + (index % 3) * 15; // Variable sizes: 55px, 70px, 85px
+                const cols = 4;
                 const rows = Math.ceil(skills.length / cols);
                 const col = index % cols;
                 const row = Math.floor(index / cols);
                 
                 // Calculate position with proper spacing
-                const leftPercent = 15 + (col * 70 / (cols - 1)); // 15% to 85% spread
-                const topPercent = 15 + (row * 70 / Math.max(rows - 1, 1)); // 15% to 85% spread
+                const leftPercent = 15 + (col * 70 / (cols - 1));
+                const topPercent = 15 + (row * 70 / Math.max(rows - 1, 1));
                 
-                const animationDelay = index * 0.3; // Staggered animation
-                const animationDuration = 4 + (index % 3); // Variable speeds: 4s, 5s, 6s
+                const animationDelay = index * 0.5; // Staggered animation
+                const animationDuration = 3 + (index % 3); // Variable speeds
                 
                 return (
                   <div 
@@ -91,12 +91,12 @@ const About = () => {
                     }}
                   >
                     <div 
-                      className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center border border-primary/30 transition-all duration-500 group-hover:scale-125 group-hover:shadow-xl group-hover:shadow-primary/30 cursor-pointer"
+                      className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center border border-primary/30 transition-all duration-500 group-hover:scale-125 group-hover:shadow-xl group-hover:shadow-primary/30 cursor-pointer bubble-float"
                       style={{
-                        animation: `float ${animationDuration}s ease-in-out infinite`,
+                        '--duration': `${animationDuration}s`,
                         animationDelay: `${animationDelay}s`,
                         animationDirection: index % 2 === 0 ? 'normal' : 'reverse'
-                      }}
+                      } as React.CSSProperties}
                     >
                       <div className="text-center">
                         <div className="w-4 h-4 bg-primary rounded-full mx-auto mb-1 opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -105,6 +105,20 @@ const About = () => {
                         </p>
                       </div>
                     </div>
+                    
+                    {/* Floating decoration dots */}
+                    {index % 3 === 0 && (
+                      <div 
+                        className="absolute -top-2 -right-2 w-3 h-3 bg-primary/60 rounded-full animate-pulse"
+                        style={{ animationDelay: `${animationDelay + 1}s` }}
+                      ></div>
+                    )}
+                    {index % 4 === 0 && (
+                      <div 
+                        className="absolute -bottom-2 -left-2 w-2 h-2 bg-accent/60 rounded-full animate-bounce"
+                        style={{ animationDelay: `${animationDelay + 2}s` }}
+                      ></div>
+                    )}
                   </div>
                 );
               })}

@@ -115,13 +115,23 @@
     @apply animate-[slide-in-right_0.6s_ease-out_forwards];
   }
   
-  /* Float animation for skill bubbles */
-  @keyframes float {
+  /* Bubble float animation for skill cards */
+  .bubble-float {
+    animation: bubble-float var(--duration, 4s) ease-in-out infinite;
+  }
+  
+  @keyframes bubble-float {
     0%, 100% {
-      transform: translate(-50%, -50%) translateY(0px);
+      transform: translate(-50%, -50%) translateY(0px) translateX(0px);
+    }
+    25% {
+      transform: translate(-50%, -50%) translateY(-8px) translateX(4px);
     }
     50% {
-      transform: translate(-50%, -50%) translateY(-10px);
+      transform: translate(-50%, -50%) translateY(-15px) translateX(-2px);
+    }
+    75% {
+      transform: translate(-50%, -50%) translateY(-6px) translateX(-4px);
     }
   }
 }
