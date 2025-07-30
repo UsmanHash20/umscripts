@@ -114,4 +114,14 @@
   .slide-in-right {
     @apply animate-[slide-in-right_0.6s_ease-out_forwards];
   }
+  
+  /* Float animation for skill bubbles */
+  @keyframes float {
+    0%, 100% {
+      transform: translate(-50%, -50%) translateY(0px);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(-10px);
+    }
+  }
 }
