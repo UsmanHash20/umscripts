@@ -59,25 +59,22 @@ const About = () => {
             </div>
           </div>
 
-          {/* Right: Tech Stack */}
+          {/* Right: Animated Skills Icons */}
           <div className="space-y-6">
-            <h3 className="text-xl font-semibold text-foreground mb-6">Technology Stack</h3>
-            <div className="space-y-4">
-              {techStack.map((tech, index) => (
+            <h3 className="text-xl font-semibold text-foreground mb-6">Core Technologies</h3>
+            <div className="grid grid-cols-3 gap-6 auto-rows-fr">
+              {skills.map((skill, index) => (
                 <div 
-                  key={tech.name}
-                  className="bg-card p-6 rounded-lg border border-border card-hover"
+                  key={skill}
+                  className="group relative"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <div className="w-6 h-6 bg-primary rounded-sm"></div>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-1">{tech.name}</h4>
-                      <p className="text-muted-foreground text-sm">{tech.description}</p>
-                    </div>
+                  <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center border border-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/25 animate-fade-in">
+                    <div className="w-8 h-8 bg-primary rounded-full opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
+                  <p className="text-center text-sm font-medium text-foreground mt-2 group-hover:text-primary transition-colors duration-300">
+                    {skill}
+                  </p>
                 </div>
               ))}
             </div>

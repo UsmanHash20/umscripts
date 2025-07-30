@@ -18,6 +18,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import AuthPage from '@/components/auth/AuthPage';
+import AddExperienceModal from '@/components/admin/AddExperienceModal';
+import AddProjectModal from '@/components/admin/AddProjectModal';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -66,6 +68,14 @@ const Admin = () => {
     completedProjects: projects.filter(p => p.status === 'Completed').length,
     totalExperience: experiences.length,
     yearsExperience: 4
+  };
+
+  const handleAddExperience = (newExperience: any) => {
+    setExperiences([...experiences, newExperience]);
+  };
+
+  const handleAddProject = (newProject: any) => {
+    setProjects([...projects, newProject]);
   };
 
   const handleDelete = (type: 'experience' | 'project', id: number) => {
@@ -215,10 +225,7 @@ const Admin = () => {
                 <h2 className="text-3xl font-bold text-foreground mb-2">Experience Management</h2>
                 <p className="text-muted-foreground">Add, edit, and manage your work experience</p>
               </div>
-              <Button className="btn-hero">
-                <Plus className="mr-2 h-4 w-4" />
-                Add Experience
-              </Button>
+              <AddExperienceModal onAddExperience={handleAddExperience} />
             </div>
 
             <div className="space-y-4">
@@ -259,10 +266,7 @@ const Admin = () => {
                 <h2 className="text-3xl font-bold text-foreground mb-2">Projects Management</h2>
                 <p className="text-muted-foreground">Add, edit, and manage your projects</p>
               </div>
-              <Button className="btn-hero">
-                <Plus className="mr-2 h-4 w-4" />
-                Add Project
-              </Button>
+              <AddProjectModal onAddProject={handleAddProject} />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">

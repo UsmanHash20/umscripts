@@ -11,14 +11,16 @@ const AuthPage: React.FC = () => {
   const handleLogin = async (email: string, password: string) => {
     // TODO: Implement actual login logic with Supabase
     console.log('Login:', { email, password });
-    // For now, simulate success
+    // Redirect to admin after successful login
+    window.location.href = '/admin';
     return Promise.resolve();
   };
 
   const handleRegister = async (name: string, email: string, password: string) => {
     // TODO: Implement actual registration logic with Supabase
     console.log('Register:', { name, email, password });
-    // For now, simulate success
+    // Redirect to admin after successful registration
+    window.location.href = '/admin';
     return Promise.resolve();
   };
 
