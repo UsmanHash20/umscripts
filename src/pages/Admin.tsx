@@ -23,7 +23,9 @@ import AddProjectModal from '@/components/admin/AddProjectModal';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('overview');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('isAuthenticated') === 'true';
+  });
   const { toast } = useToast();
 
   // Mock data - in real app, this would come from a database
@@ -102,6 +104,7 @@ const Admin = () => {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
     setIsAuthenticated(false);
     toast({
       title: "Success",

@@ -59,24 +59,48 @@ const About = () => {
             </div>
           </div>
 
-          {/* Right: Animated Skills Icons */}
+          {/* Right: Floating Bubble Skills */}
           <div className="space-y-6">
             <h3 className="text-xl font-semibold text-foreground mb-6">Core Technologies</h3>
-            <div className="grid grid-cols-3 gap-6 auto-rows-fr">
-              {skills.map((skill, index) => (
-                <div 
-                  key={skill}
-                  className="group relative"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary/20 to-primary/10 rounded-full flex items-center justify-center border border-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/25 animate-fade-in">
-                    <div className="w-8 h-8 bg-primary rounded-full opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="relative h-96 overflow-hidden rounded-lg bg-gradient-to-br from-background to-muted/30 border border-primary/10">
+              {skills.map((skill, index) => {
+                const size = 60 + (index % 3) * 20; // Variable sizes: 60px, 80px, 100px
+                const left = 10 + (index * 7) % 80; // Spread across width
+                const animationDelay = index * 0.2; // Staggered animation
+                const animationDuration = 3 + (index % 3); // Variable speeds
+                
+                return (
+                  <div 
+                    key={skill}
+                    className="absolute group animate-pulse"
+                    style={{ 
+                      left: `${left}%`,
+                      top: `${20 + (index % 4) * 20}%`,
+                      width: `${size}px`,
+                      height: `${size}px`,
+                      animationDelay: `${animationDelay}s`,
+                      animationDuration: `${animationDuration}s`,
+                      transform: 'translateX(-50%)'
+                    }}
+                  >
+                    <div 
+                      className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center border border-primary/30 transition-all duration-500 group-hover:scale-125 group-hover:shadow-xl group-hover:shadow-primary/30 cursor-pointer animate-bounce"
+                      style={{
+                        animationDelay: `${animationDelay}s`,
+                        animationDuration: `${animationDuration}s`,
+                        animationDirection: index % 2 === 0 ? 'normal' : 'reverse'
+                      }}
+                    >
+                      <div className="text-center">
+                        <div className="w-6 h-6 bg-primary rounded-full mx-auto mb-1 opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors duration-300 whitespace-nowrap">
+                          {skill}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-center text-sm font-medium text-foreground mt-2 group-hover:text-primary transition-colors duration-300">
-                    {skill}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
